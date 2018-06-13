@@ -21,10 +21,8 @@
 			$nav = $('#nav'), $nav_a = $nav.find('a'),
 			$wrapper = $('#wrapper');
 
-		// Fix: Placeholder polyfill.
 			$('form').placeholder();
 
-		// Prioritize "important" elements on medium.
 			skel.on('+medium -medium', function() {
 				$.prioritize(
 					'.important\\28 medium\\29',
@@ -32,10 +30,8 @@
 				);
 			});
 
-		// Header.
 			var ids = [];
 
-			// Set up nav items.
 				$nav_a
 					.scrolly({ offset: 44 })
 					.on('click', function(event) {
@@ -43,19 +39,15 @@
 						var $this = $(this),
 							href = $this.attr('href');
 
-						// Not an internal link? Bail.
 							if (href.charAt(0) != '#')
 								return;
 
-						// Prevent default behavior.
 							event.preventDefault();
 
-						// Remove active class from all links and mark them as locked (so scrollzer leaves them alone).
 							$nav_a
 								.removeClass('active')
 								.addClass('scrollzer-locked');
 
-						// Set active class on this link.
 							$this.addClass('active');
 
 					})
@@ -65,23 +57,17 @@
 							href = $this.attr('href'),
 							id;
 
-						// Not an internal link? Bail.
 							if (href.charAt(0) != '#')
 								return;
 
-						// Add to scrollzer ID list.
 							id = href.substring(1);
 							$this.attr('id', id + '-link');
 							ids.push(id);
 
 					});
 
-			// Initialize scrollzer.
 				$.scrollzer(ids, { pad: 300, lastHack: true });
 
-		// Off-Canvas Navigation.
-
-			// Title Bar.
 				$(
 					'<div id="titleBar">' +
 						'<a href="#header" class="toggle"></a>' +
@@ -90,7 +76,6 @@
 				)
 					.appendTo($body);
 
-			// Header.
 				$('#header')
 					.panel({
 						delay: 500,
@@ -103,11 +88,34 @@
 						visibleClass: 'header-visible'
 					});
 
-			// Fix: Remove navPanel transitions on WP<10 (poor/buggy performance).
 				if (skel.vars.os == 'wp' && skel.vars.osVersion < 10)
 					$('#titleBar, #header, #wrapper')
 						.css('transition', 'none');
 
 	});
 
+	var modal = document.getElementById('myModal');
+
+	// Get the button that opens the modal
+	var btn = document.getElementById("myBtn");
+
+	// Get the <span> element that closes the modal
+	var span = document.getElementsByClassName("close")[0];
+
+	// When the user clicks on the button, open the modal 
+	btn.onclick = function() {
+	    modal.style.display = "block";
+	}
+
+	// When the user clicks on <span> (x), close the modal
+	span.onclick = function() {
+	    modal.style.display = "none";
+	}
+
+	// When the user clicks anywhere outside of the modal, close it
+	window.onclick = function(event) {
+	    if (event.target == modal) {
+	        modal.style.display = "none";
+	    }
+	}
 })(jQuery);
