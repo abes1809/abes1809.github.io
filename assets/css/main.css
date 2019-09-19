@@ -2071,6 +2071,9 @@
 				display: block;
 				width: 100%;
 			}
+		.image-center {
+			text-align: center;
+		}
 
 /* List */
 
