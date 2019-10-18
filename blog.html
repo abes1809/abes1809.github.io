@@ -128,6 +128,95 @@
 					</div>
 				</section>
 
+				<!-- blog 2 **************************************** -->
+
+				<section id="three">
+					<div class="container">
+						<h3 style="color:#194277;">My ChiPy Blog Post 2 - Organization + Joins </h3>
+
+						<p>
+							Hello!
+							<br>
+							It is hard to believe that a month has already passed since my last blog post! It has definitely been a whirlwind of a month. I have made some note worth strides in my application but I also still have a long way to go.
+						</p>
+						<span class="image fit image-center"><iframe src="https://giphy.com/embed/l0HlVV4DMXZKhvt60" width="480" height="452" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>></span>
+						<p>
+							I have been taking my time as I have been going through and slowly building up my application to make sure I understand each piece and why I am putting code where I am putting it. Below you’ll find a couple highlights of what I have been working on and some thoughts I have had along the way. Big shout out to my mentor Ben for all his help during this past month!
+						</p>
+
+						<h4>Don't Panic - Organize!</h4>
+
+						<span class="image fit"><img src="images/dont_panic_fish.png" alt="" /></span>
+						<p>
+							As I have been working on my project – I quickly saw the need for some type of organization to help me make sure everything I wanted was in the application and to make the work feel more doable. Given that I work full time and I am involved in other community organizations – the time I can spend on my project is unfortunately limited. This means when I do have time to sit down and work I want that time to be spent focused and productive. Something I have done for projects in the past is making a Trello board! <a href=”https://trello.com” target="_blank">Trello</a> is a great organizational tool and I would highly recommended it for other folks looking for a organization tool. It allows you to create different “boards”, categorize, and track different tasks for a project. Its basically a really fancy to do list. It looks like this!
+						</p>
+
+						<span class="image fit"><img src="images/trello.png" alt="" /></span>
+
+						<p>I quickly realized the first draft of my Trello board had cards that were too big  - I would often sit down to work on my application and feel overwhelmed by the amount of work I had to do. This lead me to having a conversation with my mentor, Ben, about structuring my board and it lead to some really great suggestions!</p>
+
+						<p> The first thing we talked about is how you can write a work “ticket”. One approach is to structure tickets around the specific function you want to build or edit. For example, you might create a work ticket that says “build name filter”. With this card you would assume you need to build all of the code and back end logic to make a functioning name filter. Another way to write this, however, might be “a user can filter program by the program name”. This is a user flow focused approach on writing work tickets and it is more encompassing. With this I assume I not only have to build the back end logic but I need a place on the users side for them to be able to filter. This also makes sure that all the behaviors you want a user to have the ability to do is covered in your project.</p>
+
+						<p>Another topic Ben and I discussed in relation to this is creating a system of time estimates for each work ticket. This way you have a rough idea in your mind about how long something should take and if it looks like it is going to take too long – divide it up into separate tickets! One system to do this is is by assigning each work ticket a number: </p>
+
+						<ul>
+							<li>1 = 1 hour</li>
+							<li>2 = hald a day to a full day</li>
+							<li>5 = serveral days</li>
+							<li>7 = a week</li>
+							<li>13 - serveral weeks</li>
+						</ul>
+
+						<p>
+							In general, you want to try and keep your work tickets down all between 1 and 5. If it looks like a ticket is going to take a week to several weeks that is probably something that can be divided up! While this system may not work for everyone – I have found it super useful in looking at and separating all the tasks I have to complete. I feel much more confident moving forward and getting everything done I want to on my project!
+						</p>
+
+						<h4>Joins, Joins, Joins</h4>
+						<p>
+							I know am one of the lucky ones in this program – a lot of the data I need is available to me by the organization I work at. Anything else I needed – I was able to find easily through the <a href=”https://data.cityofchicago.org/”>City of Chicago Data Portal</a>. Its super cool – check it out if you have not! I got all of the program and organization information from datasets that are available to me at work. All zip code, neighborhood, and school information I pulled from the city of Chicago data portal. Given that one of the main functions of my application is give a user the ability to visualize and find programs close to them and that fit their needs – I want the user to be able to filter programs for specific attributes but also want to give the user to see all of the programs under a certain attribute. Take program type for example. A program can inhabit multiple types and a program type can have many programs – this is called a many to many relationship. In order to give the user the ability to search for information how I would like – that means I need create some join tables! 
+						</p>
+
+						<p>
+							A join is when you combine two SQL tables based on a shared column or attribute. For the purpose of this section I will only be focusing on full outer joins. Here is a visual represnetation of what that would like:
+
+							<span class="image fit"><img src="images/full-join.png" alt="" /></span>
+
+							And here is what these two tables (Programs and Types) might look like on their own:
+						</p>
+						<p>Programs:</p>
+						<span class="image fit"><img src="images/excel_programs.png" alt="" /></span>
+						<p>Types:</p>
+						<span class="image fit"><img src="images/excel_types.png" alt="" /></span>
+
+						<p>
+							We want to unite these two tables to make it easier to search for things. But right now we currently don’t have a straight forward way to pull this information together. These two tables need to be combined based off of one attribute. 
+						</p>
+
+						<p>
+							In our programs example the Program table will be linked to the Type table based on the program_id and the Type table will be linked to the Program table based on type_id. It will then be sorted so that we can pull all the programs and every type they are associated with. We will also be able to see all programs of a specific type. This join table would look like this:
+						</p>
+
+						<span class="image fit"><img src="images/join_table_excel.png" alt="" /></span>
+
+						<p>
+							Finally, we have to make sure we are defining this relationship in our Flask application models folder. This might look something like this:
+						</p>
+
+						<span class="image fit"><img src="images/code_snippet_1.png" alt="" /></span>
+
+						<p>
+							Annnnddd that’s it! Now we have a unified place with all of the information that we want to pull. This will make pulling this information stored across different table much more straight forward and simple.
+						</p>
+
+						<p>
+							Thanks for sticking with me! Until next time :-). 
+						</p>
+
+					</div>
+				</section>
+			</div>
+		</div>
+
 
 		<!-- Scripts -->
 			<script src="assets/js/jquery.min.js"></script>
