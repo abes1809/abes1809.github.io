@@ -21,8 +21,8 @@
 				<ul>
 					<li><a href="#one" class="active">About</a></li>
 					<li><a href="#two">Post # 1 - Featuring Python, Flask, & TDD</a></li>
-					<li><a href="#three">My ChiPy Blog Post 2 - Organization + Joins </a></li>
-					<li><a href="#four">My ChiPy Blog Post 3 - Importing and Pulling Spatial Data with MySQL and Flask </a></li>
+					<li><a href="#three">Post # 2 - Organization + Joins </a></li>
+					<li><a href="#four">Post # 3 - Importing and Pulling Spatial Data with MySQL and Flask </a></li>
 					<li><a href="index.html">Home</a></li>
 				</ul>
 			</nav>
@@ -241,12 +241,10 @@ ogr2ogr –f MySQL MySQL:database_name,host=localhost,user=database_username, pa
 						</pre>
 
 						<p>
-							If the table and column specified in the command are not found, the data will be automatically be imported into a new table. I edited the bold words written above according to my system configuration and needs and success! I now have a new table in my database that has all of my Neighborhoods and shapefile information.
+							If the table and column specified in the command are not found, the data will be automatically imported into a new table. I edited the bold words written above according to my system configuration and needs and success! I now have a new table in my database that has all of my Neighborhoods and shapefile information.
 						</p>
 
-						<h4>Pulling the SHAPE column in Flask</h4>
-
-						<p>Next I needed to move my shapefile data over to my Neighborhoods table since I had set up my Neighborhoods table before importing my spatial data. I needed to make sure the neighborhood names matched as well to ensure the correct spatial data was copied to the correct neighborhoods. I was able to achieve this with a simple SQL query that looked like this:</p>
+						<p>Next, I needed to move my shapefile data over to my Neighborhoods table since I had set up my Neighborhoods table before importing my spatial data. I needed to make sure the neighborhood names matched as well to ensure the correct spatial data was copied to the correct neighborhood columns. I was able to achieve this with a simple SQL query that looked like this:</p>
 
 						<pre>
 							<code>
@@ -290,7 +288,7 @@ SHAPE = db.Column(Geometry, nullable=False)
 						<span class="image fit"><img src="images/map_1.png" alt="" /></span>
 						
 						<p>
-							Overall, I am excited about what I have been able to learn and create throughout the duration of my PyChi mentorship. I have really enjoyed working with my mentor and learned a ton! I am excited to push through these last couple weeks to create a more polished product that will be an upgrade from the current version of Literaseek! 
+							Overall, I am excited about what I have been able to learn and create throughout the duration of my ChiPy mentorship. I have really enjoyed working with my mentor and learned a ton! I am excited to push through these last couple weeks to create a more polished product that will be an upgrade from the current version of Literaseek! 
 						</p>
 
 					</div>
