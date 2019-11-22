@@ -224,14 +224,14 @@
 						</p>
 
 						<p>
-							I know I said this previous post but I truly cannot believe how fast this past month has flown by. I have been picking away at my project, running into roadblocks, and working through them. One of the main pieces of my project involves creating an interactive map that displays the location of programs based on regions of the city and neighborhoods. This means I wanted to visually represent the Chicago neighborhood boundaries on a map. Luckily the shapefile data is easily available through the <a href="https://data.cityofchicago.org/" target="_blank">City of Chicago Data Portal</a>. Getting the shapefile imported into my MySQL database and querying it in my app was not as easy as I had hoped. This is due to the fact that MySQL and Flask do not work very well with Geometry data and shapefiles. My process on importing the database and querying it into my app is discussed below for my final post! Lets dive in!
+							I know I said this in my previous post but I truly cannot believe how fast this past month has flown by. I have been picking away at my project, running into roadblocks, and working through them. One of the main pieces of my project involves creating an interactive map that displays the location of programs based on regions of the city and neighborhoods. This means I wanted to visually represent the Chicago neighborhood boundaries on a map. Luckily the shapefile data is easily available through the <a href="https://data.cityofchicago.org/" target="_blank">City of Chicago Data Portal</a>. Getting the shapefile imported into my MySQL database and querying it in my app was not as easy as I had hoped. This is due to the fact that MySQL and Flask do not work very well with Geometry data and shapefiles. My process on importing the database and querying it into my app is discussed below for my final post! Let's dive in!
 						</p>
 						<span class="image fit image-center"><iframe src="https://giphy.com/embed/2cehTmp8rASyunE10R" width="480" height="452" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>></span>
 
 						<h4>Getting Spatial Data into MySQL</h4>
 
 						<p>
-							The first layer of my map in my map features the Chicago neighborhood boundaries. In order to get this data I downloaded the shape file from the City of Chicago data portal in a csv file. I then imported my shapefile into my MySQL database as spatial data into its own table using the <a href="https://gdal.org/programs/ogr2ogr.html" target="_blank">ogr2ogr</a> utility from the <a href="https://gdal.org/" target="_blank">GLAD</a> Library. GLAD is a library that is used for reading and writing raster and vector geospatial data formats. The command I used to execute this looked like this:
+							The first layer of my map in my map features the Chicago neighborhood boundaries. In order to get this data I downloaded the shape file from the City of Chicago data portal in a csv file. I then imported my shapefile into my MySQL database as geometry data. I imported it into its own table using the <a href="https://gdal.org/programs/ogr2ogr.html" target="_blank">ogr2ogr</a> utility from the <a href="https://gdal.org/" target="_blank">GLAD</a> Library. GLAD is a library that is used for reading and writing raster and vector geospatial data formats. The command I used to execute this looked like this:
 						</p>
 
 						<pre>
@@ -241,10 +241,10 @@ ogr2ogr –f MySQL MySQL:database_name,host=localhost,user=database_username, pa
 						</pre>
 
 						<p>
-							If the table and column specified a new table with the information will automatically be created. I edited the bold word written above according to my system configuration and needs and success! I now have a table in my database that has all of my Neighborhoods and shapefile information.
+							If the table and column specified in the command are not found, the data will be automatically be imported into a new table. I edited the bold words written above according to my system configuration and needs and success! I now have a new table in my database that has all of my Neighborhoods and shapefile information.
 						</p>
 
-						<h4>Puling the SHAPE column in Flask</h4>
+						<h4>Pulling the SHAPE column in Flask</h4>
 
 						<p>Next I needed to move my shapefile data over to my Neighborhoods table since I had set up my Neighborhoods table before importing my spatial data. I needed to make sure the neighborhood names matched as well to ensure the correct spatial data was copied to the correct neighborhoods. I was able to achieve this with a simple SQL query that looked like this:</p>
 
@@ -257,7 +257,9 @@ WHERE Neighborhood_Shapes.pri_neighboorhoods = Neighborhoods.name;
 							</code>
 						</pre>
 
-						<p>Once that was complete my next step was pulling the geometry data from my Neighborhoods table into my Flask application. I ran into a problem while attempting to do this - <a href="" target="">GeoAlchemy2</a> - the extension for SQLAlchemy ORM to work with spatial databases—does not support MySQL databases. This means there was nothing built into the ORM or the models file that I could use to pull my geometry column into my app. I spoke with my mentor Ben and after confirming that there is not a column available within the SQLAlchemy ORM that I can use, Ben suggested creating a custom column in my models file. Ben then sent me Flask documentation on doing this which you can find <a href="https://docs.sqlalchemy.org/en/13/core/custom_types.html" target="_blank">here</a> and there is even a geometry specific example <a href="https://docs.sqlalchemy.org/en/13/core/custom_types.html#applying-sql-level-bind-result-processing" target="_blank">here</a>. I created my geometry column at the top of my models.py file like this:</p>
+						<h4>Pulling the SHAPE Column into Flask</h4>
+
+						<p>Once that was complete my next step was pulling the geometry data from my Neighborhoods table into my Flask application. I ran into a problem while attempting to do this - <a href="" target="">GeoAlchemy2</a> - the extension for the SQLAlchemy ORM to work with spatial databases—does not support MySQL databases. This means there was nothing built into the ORM or the models file that I could use to pull my geometry column into my app. I spoke with my mentor Ben and after confirming that there is not a column available within the SQLAlchemy ORM that I can use, Ben suggested creating a custom column in my models file. Ben then sent me Flask documentation on doing this which you can find <a href="https://docs.sqlalchemy.org/en/13/core/custom_types.html" target="_blank">here</a> and there is even a geometry specific example <a href="https://docs.sqlalchemy.org/en/13/core/custom_types.html#applying-sql-level-bind-result-processing" target="_blank">here</a>. I created my geometry column at the top of my models.py file like this:</p>
 
 						<pre>
 							<code>
@@ -282,7 +284,7 @@ SHAPE = db.Column(Geometry, nullable=False)
 						</pre>
 	
 						<p>
-							And that’s it! I was able to import my Chicago Neighborhoods shapefile into my MySQL database then using that geometry information to work with Leaflet and create a map that looks like this:
+							And that’s it! I was able to import my Chicago Neighborhoods shapefile into my MySQL database then use that geometry information to work with Leaflet and create a map that looks like this:
 						</p>
 
 						<span class="image fit"><img src="images/map_1.png" alt="" /></span>
