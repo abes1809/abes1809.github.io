@@ -1633,7 +1633,7 @@
 	}
 
 	h1, h2, h3, h4, h5, h6 {
-		color: #777;
+		color: #433f40;
 		font-weight: 700;
 		line-height: 1em;
 		margin: 0 0 0.5625em 0;
@@ -1768,7 +1768,7 @@
 	}
 
 	header.major h2 {
-		color: #217ea0;
+		color: #ef6258;
 		font-size: 3.5em;
 	}
 
@@ -2137,7 +2137,7 @@
 				}
 
 				ul.feature-icons li:before {
-					background: #217ea0;
+					background: #ef6258;
 					border-radius: 100%;
 					color: #ffffff;
 					display: block;
@@ -2506,7 +2506,7 @@
 		-webkit-justify-content: space-between;
 		-ms-justify-content: space-between;
 		justify-content: space-between;
-		background: #217ea0;
+		background: #433f40;
 		color: #d1f1e9;
 		height: 100%;
 		overflow-y: auto;
@@ -2548,7 +2548,7 @@
 			#header > header .avatar {
 				display: block;
 				margin: 0 auto 2.25em auto;
-				width: 8em;
+				width: 12em;
 			}
 
 			#header > header h1 {
@@ -2595,7 +2595,6 @@
 			}
 
 				#header > nav ul li {
-					border-top: solid 2px #217ea0;
 					display: block;
 					padding: 0;
 				}
@@ -2610,12 +2609,14 @@
 						display: block;
 						padding: 0.85em 0;
 						text-decoration: none;
+						font-weight: bold;
+						font-size: 16px;
 					}
 
 						#header > nav ul li a.active {
-							background: #217ea0;
+							background: #c8c8c8;
 							/*section text highlighter*/
-							color: #b6e9dc !important;
+							color: #433f40 !important;
 						}
 
 					#header > nav ul li:first-child {
@@ -2852,7 +2853,7 @@
 				top: 0;
 				width: 100%;
 				z-index: 10001;
-				background: #222;
+				background: #433f40;
 				color: #fff;
 				min-width: 320px;
 			}
@@ -2894,7 +2895,7 @@
 					}
 
 					#titleBar .toggle:before {
-						background: #217ea0;
+						background: #ef6258;
 						color: #ffffff;
 						content: '\f0c9';
 						display: block;
